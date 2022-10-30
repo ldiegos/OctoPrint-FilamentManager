@@ -14,7 +14,7 @@ from octoprint.util import dict_merge
 from octoprint.util.version import is_octoprint_compatible
 
 from .api import FilamentManagerApi
-from .data import FilamentManager
+#from .data import FilamentManager
 from .newodometer import NewFilamentOdometer
 # from .odometer import FilamentOdometer
 
