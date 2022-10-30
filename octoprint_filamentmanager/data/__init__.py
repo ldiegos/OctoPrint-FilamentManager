@@ -12,7 +12,7 @@ from backports import csv
 from uritools import urisplit
 #from uritools import uricompose, urijoin, urisplit, uriunsplit
 #from sqlalchemy.engine.url import URL
-from sqlalchemy.engine import URL
+from sqlalchemy.engine.url import URL
 #from sqlalchemy.engine import url
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.schema import MetaData, Table, Column, ForeignKeyConstraint, DDL, PrimaryKeyConstraint
