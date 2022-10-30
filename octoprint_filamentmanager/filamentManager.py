@@ -6,20 +6,28 @@ __copyright__ = "Copyright (C) 2017 Sven Lohrmann - Released under terms of the 
 
 import io
 import os
+
 import sys
+import collections
+
+if sys.version_info.major == 3 and sys.version_info.minor >= 10:
+    setattr(collections, "MutableMapping", collections.abc.MutableMapping)
+    from collections.abc import MutableMapping
+else:
+    from collections import MutableMapping
+
+
 from multiprocessing import Lock
 
-# from backports import csv
+from backports import csv
 from uritools import urisplit
-# from sqlalchemy.engine.url import URL
+from sqlalchemy.engine.url import URL
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.schema import MetaData, Table, Column, ForeignKeyConstraint, DDL, PrimaryKeyConstraint
 from sqlalchemy.sql import insert, update, delete, select, label
 from sqlalchemy.types import INTEGER, VARCHAR, REAL, TIMESTAMP
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 import sqlalchemy.sql.functions as func
-
-from collections.abc import MutableMapping
 
 # from .listen import PGNotify
 
@@ -36,9 +44,7 @@ class FilamentManagerData(object):
                                  username=config.get("user", ""),
                                  password=config.get("password", ""))
 
-        # if sys.version_info.major == 3 and sys.version_info.minor >= 10:
-        #     import collections
-        #     setattr(collections, "MutableMapping", collections.abc.MutableMapping)
+
 
 
         # # QUESTION thread local connection (pool) vs sharing a serialized connection, pro/cons?

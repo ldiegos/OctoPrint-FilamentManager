@@ -7,12 +7,21 @@ __copyright__ = "Copyright (C) 2017 Sven Lohrmann - Released under terms of the 
 
 from math import pi as PI
 
+import sys
+import collections
+
+if sys.version_info.major == 3 and sys.version_info.minor >= 10:
+    setattr(collections, "MutableMapping", collections.abc.MutableMapping)
+    from collections.abc import MutableMapping
+else:
+    from collections import MutableMapping
+
 import octoprint.plugin
 from octoprint.settings import valid_boolean_trues
 from octoprint.events import Events
 from octoprint.util import dict_merge
 from octoprint.util.version import is_octoprint_compatible
-from collections.abc import MutableMapping
+
 
 from .api import FilamentManagerApi
 from .filamentManager import FilamentManagerData
