@@ -37,7 +37,7 @@ class FilamentManagerData(object):
     DIALECT_POSTGRESQL = "postgresql"
 
     def __init__(self, config):
-        #self._logger.info("kkkkkkkk-FilamentManager(): def __init__(self, config):")
+        self._logger.info("kkkkkkkk-FilamentManager(): def __init__(self, config):")
         self.notify = None
         self.conn = self.connect(config.get("uri", ""),
                                  database=config.get("name", ""),
@@ -59,7 +59,7 @@ class FilamentManagerData(object):
 
 
     def connect(self, uri, database="", username="", password=""):
-         # self._logger.info("kkkkkkkk-FilamentManager(): def connect(self, uri, database")
+        self._logger.info("kkkkkkkk-FilamentManager(): def connect(self, uri, database")
 
         uri_parts = urisplit(uri)
 
@@ -306,6 +306,7 @@ class FilamentManagerData(object):
         return sel
 
     def get_all_selections(self, client_id):
+        self._logger.info("kkkkkkkk-FilamentManager(): get_all_selections(self, client_id):")        
         with self.lock, self.conn.begin():
             j1 = self.selections.join(self.spools, self.selections.c.spool_id == self.spools.c.id)
             j2 = j1.join(self.profiles, self.spools.c.profile_id == self.profiles.c.id)
@@ -315,6 +316,7 @@ class FilamentManagerData(object):
         return [self._build_selection_dict(row, row.keys()) for row in result.fetchall()]
 
     def get_selection(self, identifier, client_id):
+        self._logger.info("kkkkkkkk-FilamentManager():  def get_selection(self, identifier, client_id):")        
         with self.lock, self.conn.begin():
             j1 = self.selections.join(self.spools, self.selections.c.spool_id == self.spools.c.id)
             j2 = j1.join(self.profiles, self.spools.c.profile_id == self.profiles.c.id)
