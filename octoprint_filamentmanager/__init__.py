@@ -60,16 +60,16 @@ class FilamentManagerPlugin(FilamentManagerApi,
         self.alreadyCanceled = False
 
         db_config = self._settings.get(["database"], merged=True)
-	#self._logger.info("%s" % db_config)
+        self._logger.info("%s" % db_config)
         migrate_schema_version = False
 
         if db_config["useExternal"] not in valid_boolean_trues:
             import os
             # set uri for internal sqlite database
             db_path = os.path.join(self.get_plugin_data_folder(), "filament.db")
-	    #self._logger.info("%s" % db_path)
+            self._logger.info("%s" % db_path)
             db_config["uri"] = "sqlite:///" + db_path
-	    #self._logger.info("sqlite:///")
+            self._logger.info("sqlite:///")
             migrate_schema_version = os.path.isfile(db_path)
 
         try:
@@ -134,7 +134,7 @@ class FilamentManagerPlugin(FilamentManagerApi,
     def on_after_startup(self):
         self.odometerEnabled = self._settings.get_boolean(["enableOdometer"])
         self.pauseEnabled = self._settings.get_boolean(["autoPause"])
-	 self._logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+        self._logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkk")
 
 
         # subscribe to the notify channel so that we get notified if another client has altered the data
