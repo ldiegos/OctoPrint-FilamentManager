@@ -10,7 +10,8 @@ from multiprocessing import Lock
 
 from backports import csv
 from uritools import urisplit
-# from sqlalchemy.engine.url import URL
+#from uritools import uricompose, urijoin, urisplit, uriunsplit
+#from sqlalchemy.engine.url import URL
 from sqlalchemy.engine import URL
 #from sqlalchemy.engine import url
 from sqlalchemy import create_engine, event, text
