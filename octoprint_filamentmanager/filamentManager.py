@@ -19,6 +19,8 @@ from sqlalchemy.types import INTEGER, VARCHAR, REAL, TIMESTAMP
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 import sqlalchemy.sql.functions as func
 
+from collections.abc import MutableMapping
+
 # from .listen import PGNotify
 
 class FilamentManagerData(object):
@@ -34,9 +36,9 @@ class FilamentManagerData(object):
                                  username=config.get("user", ""),
                                  password=config.get("password", ""))
 
-        if sys.version_info.major == 3 and sys.version_info.minor >= 10:
-            import collections
-            setattr(collections, "MutableMapping", collections.abc.MutableMapping)
+        # if sys.version_info.major == 3 and sys.version_info.minor >= 10:
+        #     import collections
+        #     setattr(collections, "MutableMapping", collections.abc.MutableMapping)
 
 
         # # QUESTION thread local connection (pool) vs sharing a serialized connection, pro/cons?
