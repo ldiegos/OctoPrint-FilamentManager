@@ -6,7 +6,7 @@ __copyright__ = "Copyright (C) 2017 Sven Lohrmann - Released under terms of the 
 
 import io
 import os
-# import sys
+import sys
 from multiprocessing import Lock
 
 # from backports import csv
@@ -34,9 +34,9 @@ class FilamentManagerData(object):
                                  username=config.get("user", ""),
                                  password=config.get("password", ""))
 
-        # if sys.version_info.major == 3 and sys.version_info.minor >= 10:
-        #     import collections
-        #     setattr(collections, "MutableMapping", collections.abc.MutableMapping)
+        if sys.version_info.major == 3 and sys.version_info.minor >= 10:
+            import collections
+            setattr(collections, "MutableMapping", collections.abc.MutableMapping)
 
 
         # # QUESTION thread local connection (pool) vs sharing a serialized connection, pro/cons?
