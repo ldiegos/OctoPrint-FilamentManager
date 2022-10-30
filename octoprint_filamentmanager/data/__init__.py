@@ -27,6 +27,7 @@ class FilamentManager(object):
     DIALECT_POSTGRESQL = "postgresql"
 
     def __init__(self, config):
+        self._logger.info("kkkkkkkk-FilamentManager(): def __init__(self, config):")
         self.notify = None
         self.conn = self.connect(config.get("uri", ""),
                                  database=config.get("name", ""),
@@ -47,6 +48,8 @@ class FilamentManager(object):
             self.notify = PGNotify(self.conn.engine.url)
 
     def connect(self, uri, database="", username="", password=""):
+        self._logger.info("kkkkkkkk-FilamentManager(): def connect(self, uri, database")
+
         uri_parts = urisplit(uri)
 
         if uri_parts.scheme == self.DIALECT_SQLITE:
@@ -65,12 +68,16 @@ class FilamentManager(object):
         return engine.connect()
 
     def close(self):
+        self._logger.info("kkkkkkkk-FilamentManager(): def close(self):")
         self.conn.close()
 
     def engine_dialect_is(self, dialect):
+        self._logger.info("kkkkkkkk-FilamentManager(): def engine_dialect_is(self, dialect):")
         return self.conn.engine.dialect.name == dialect if self.conn is not None else False
 
     def initialize(self):
+        self._logger.info("kkkkkkkk-FilamentManager(): def initialize(self):")
+
         metadata = MetaData()
 
         self.profiles = Table("profiles", metadata,
