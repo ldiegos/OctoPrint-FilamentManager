@@ -67,14 +67,16 @@ class FilamentManagerPlugin(FilamentManagerApi,
             import os
             # set uri for internal sqlite database
             db_path = os.path.join(self.get_plugin_data_folder(), "filament.db")
-	    self._logger.info("%s" % db_path)
+	    #self._logger.info("%s" % db_path)
             db_config["uri"] = "sqlite:///" + db_path
-	    self._logger.info("sqlite:///")
+	    #self._logger.info("sqlite:///")
             migrate_schema_version = os.path.isfile(db_path)
 
         try:
             # initialize database
             self.filamentManager = FilamentManager(db_config)
+	    
+            self._logger.info("{db_path1}".format(db_path1=db_path)
 
             self.filamentManager.initialize()
 
