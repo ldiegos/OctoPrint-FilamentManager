@@ -18,7 +18,7 @@ __copyright__ = "Copyright (C) 2017 Sven Lohrmann - Released under terms of the 
 # from sqlalchemy.dialects.postgresql import insert as pg_insert
 # import sqlalchemy.sql.functions as func
 
-from .listen import PGNotify
+# from .listen import PGNotify
 
 
 class FilamentManagerData(object):
@@ -34,18 +34,18 @@ class FilamentManagerData(object):
                                  username=config.get("user", ""),
                                  password=config.get("password", ""))
 
-        # QUESTION thread local connection (pool) vs sharing a serialized connection, pro/cons?
-        # from sqlalchemy.orm import sessionmaker, scoped_session
-        # Session = scoped_session(sessionmaker(bind=engine))
-        # when using a connection pool how do we prevent notifiying ourself on database changes?
-        self.lock = Lock()
+        # # QUESTION thread local connection (pool) vs sharing a serialized connection, pro/cons?
+        # # from sqlalchemy.orm import sessionmaker, scoped_session
+        # # Session = scoped_session(sessionmaker(bind=engine))
+        # # when using a connection pool how do we prevent notifiying ourself on database changes?
+        # self.lock = Lock()
 
-        if self.engine_dialect_is(self.DIALECT_SQLITE):
-            # Enable foreign key constraints
-            self.conn.execute(text("PRAGMA foreign_keys = ON").execution_options(autocommit=True))
-        elif self.engine_dialect_is(self.DIALECT_POSTGRESQL):
-            # Create listener thread
-            self.notify = PGNotify(self.conn.engine.url)
+        # if self.engine_dialect_is(self.DIALECT_SQLITE):
+        #     # Enable foreign key constraints
+        #     self.conn.execute(text("PRAGMA foreign_keys = ON").execution_options(autocommit=True))
+        # elif self.engine_dialect_is(self.DIALECT_POSTGRESQL):
+            ## Create listener thread
+            # self.notify = PGNotify(self.conn.engine.url)
 
     # def connect(self, uri, database="", username="", password=""):
     #     self._logger.info("kkkkkkkk-FilamentManager(): def connect(self, uri, database")
