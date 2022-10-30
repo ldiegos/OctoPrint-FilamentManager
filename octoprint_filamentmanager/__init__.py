@@ -76,7 +76,7 @@ class FilamentManagerPlugin(FilamentManagerApi,
             # initialize database
             self.filamentManager = FilamentManager(db_config)
 	    
-            self._logger.info("{db_path1}".format(db_path1=db_path)
+            #self._logger.info("{db_path1}".format(db_path1=db_path)
 
             self.filamentManager.initialize()
 
