@@ -457,12 +457,12 @@ __required_octoprint_version__ = ">=1.3.6"
 
 
 def __plugin_load__():
-    if not is_octoprint_compatible(__required_octoprint_version__):
-        import logging
-        logger = logging.getLogger(__name__)
-        logger.error("OctoPrint version is not compatible ({version} required)"
-                     .format(version=__required_octoprint_version__))
-        return
+    #if not is_octoprint_compatible(__required_octoprint_version__):
+    #    import logging
+    #    logger = logging.getLogger(__name__)
+    #    logger.error("OctoPrint version is not compatible ({version} required)"
+    #                 .format(version=__required_octoprint_version__))
+    #    return
 
     global __plugin_implementation__
     __plugin_implementation__ = FilamentManagerPlugin()
