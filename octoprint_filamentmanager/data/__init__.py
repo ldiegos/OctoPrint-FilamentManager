@@ -10,7 +10,8 @@ from multiprocessing import Lock
 
 from backports import csv
 from uritools import urisplit
-from sqlalchemy.engine.url import URL
+# from sqlalchemy.engine.url import URL
+from sqlalchemy.engine import URL
 #from sqlalchemy.engine import url
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.schema import MetaData, Table, Column, ForeignKeyConstraint, DDL, PrimaryKeyConstraint
@@ -166,6 +167,7 @@ class FilamentManager(object):
         metadata.create_all(self.conn, checkfirst=True)
 
     def execute_script(self, script):
+        self._logger.info("kkkkkkkk-FilamentManager(): def execute_script(self, script):")        
         with self.lock, self.conn.begin():
             for stmt in script.split(";"):
                 self.conn.execute(text(stmt))
