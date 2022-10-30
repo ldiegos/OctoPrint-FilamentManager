@@ -27,7 +27,7 @@ class FilamentManagerData(object):
     DIALECT_POSTGRESQL = "postgresql"
 
     def __init__(self, config):
-        self._logger.info("kkkkkkkk-FilamentManager(): def __init__(self, config):")
+        #self._logger.info("kkkkkkkk-FilamentManager(): def __init__(self, config):")
         self.notify = None
         self.conn = self.connect(config.get("uri", ""),
                                  database=config.get("name", ""),
