@@ -80,7 +80,7 @@ class FilamentManagerPlugin(FilamentManagerApi,
             
             # initialize database
 
-            self.filamentManager = FilamentManager(db_config)
+            #self.filamentManager = FilamentManager(db_config)
 
             self._logger.info("kkkkkkkk: %s" % db_config)
 
