@@ -12,6 +12,7 @@ from octoprint.settings import valid_boolean_trues
 from octoprint.events import Events
 from octoprint.util import dict_merge
 from octoprint.util.version import is_octoprint_compatible
+from collections.abc import MutableMapping
 
 from .api import FilamentManagerApi
 from .filamentManager import FilamentManagerData
