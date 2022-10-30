@@ -4,9 +4,9 @@ __author__ = "Sven Lohrmann <malnvenshorn@gmail.com>"
 __license__ = "GNU Affero General Public License http://www.gnu.org/licenses/agpl.html"
 __copyright__ = "Copyright (C) 2017 Sven Lohrmann - Released under terms of the AGPLv3 License"
 
-# import io
-# import os
-# from multiprocessing import Lock
+import io
+import os
+from multiprocessing import Lock
 
 # from backports import csv
 # from uritools import urisplit
@@ -294,14 +294,14 @@ class FilamentManagerData(object):
     #     del sel["spool"]["profile_id"]
     #     return sel
 
-    # def get_all_selections(self, client_id):
-    #     with self.lock, self.conn.begin():
-    #         j1 = self.selections.join(self.spools, self.selections.c.spool_id == self.spools.c.id)
-    #         j2 = j1.join(self.profiles, self.spools.c.profile_id == self.profiles.c.id)
-    #         stmt = select([self.selections, self.spools, self.profiles]).select_from(j2)\
-    #             .where(self.selections.c.client_id == client_id).order_by(self.selections.c.tool)
-    #     result = self.conn.execute(stmt)
-    #     return [self._build_selection_dict(row, row.keys()) for row in result.fetchall()]
+    def get_all_selections(self, client_id):
+        with self.lock, self.conn.begin():
+            j1 = self.selections.join(self.spools, self.selections.c.spool_id == self.spools.c.id)
+            j2 = j1.join(self.profiles, self.spools.c.profile_id == self.profiles.c.id)
+            stmt = select([self.selections, self.spools, self.profiles]).select_from(j2)\
+                .where(self.selections.c.client_id == client_id).order_by(self.selections.c.tool)
+        result = self.conn.execute(stmt)
+        return [self._build_selection_dict(row, row.keys()) for row in result.fetchall()]
 
     # def get_selection(self, identifier, client_id):
     #     with self.lock, self.conn.begin():
