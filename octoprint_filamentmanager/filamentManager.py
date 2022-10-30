@@ -6,6 +6,7 @@ __copyright__ = "Copyright (C) 2017 Sven Lohrmann - Released under terms of the 
 
 import io
 import os
+# import sys
 from multiprocessing import Lock
 
 # from backports import csv
@@ -20,7 +21,6 @@ import sqlalchemy.sql.functions as func
 
 # from .listen import PGNotify
 
-
 class FilamentManagerData(object):
 
     DIALECT_SQLITE = "sqlite"
@@ -34,6 +34,11 @@ class FilamentManagerData(object):
                                  username=config.get("user", ""),
                                  password=config.get("password", ""))
 
+        # if sys.version_info.major == 3 and sys.version_info.minor >= 10:
+        #     import collections
+        #     setattr(collections, "MutableMapping", collections.abc.MutableMapping)
+
+
         # # QUESTION thread local connection (pool) vs sharing a serialized connection, pro/cons?
         # # from sqlalchemy.orm import sessionmaker, scoped_session
         # # Session = scoped_session(sessionmaker(bind=engine))
@@ -46,6 +51,7 @@ class FilamentManagerData(object):
         # elif self.engine_dialect_is(self.DIALECT_POSTGRESQL):
             ## Create listener thread
             # self.notify = PGNotify(self.conn.engine.url)
+
 
     def connect(self, uri, database="", username="", password=""):
          # self._logger.info("kkkkkkkk-FilamentManager(): def connect(self, uri, database")
