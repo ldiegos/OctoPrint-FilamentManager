@@ -14,7 +14,7 @@ from octoprint.util import dict_merge
 from octoprint.util.version import is_octoprint_compatible
 
 from .api import FilamentManagerApi
-from .data import FilamentManager
+#from .data import FilamentManager
 from .newodometer import NewFilamentOdometer
 # from .odometer import FilamentOdometer
 
@@ -77,8 +77,10 @@ class FilamentManagerPlugin(FilamentManagerApi,
 
         try:
             self._logger.info("kkkkkkkk: try")
+            
             # initialize database
-            self.filamentManager = FilamentManager(db_config)
+            #self.filamentManager = FilamentManager(db_config)
+            
             self._logger.info("kkkkkkkk: %s" % db_config)
 
             self.filamentManager.initialize()
