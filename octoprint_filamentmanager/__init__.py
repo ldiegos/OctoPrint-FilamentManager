@@ -134,6 +134,8 @@ class FilamentManagerPlugin(FilamentManagerApi,
     def on_after_startup(self):
         self.odometerEnabled = self._settings.get_boolean(["enableOdometer"])
         self.pauseEnabled = self._settings.get_boolean(["autoPause"])
+	 self._logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+
 
         # subscribe to the notify channel so that we get notified if another client has altered the data
         # notify is not available if we are connected to the internal sqlite database
