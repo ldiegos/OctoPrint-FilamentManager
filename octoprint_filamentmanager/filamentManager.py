@@ -47,25 +47,25 @@ class FilamentManagerData(object):
             ## Create listener thread
             # self.notify = PGNotify(self.conn.engine.url)
 
-    # def connect(self, uri, database="", username="", password=""):
-    #     self._logger.info("kkkkkkkk-FilamentManager(): def connect(self, uri, database")
+    def connect(self, uri, database="", username="", password=""):
+         # self._logger.info("kkkkkkkk-FilamentManager(): def connect(self, uri, database")
 
-    #     uri_parts = urisplit(uri)
+        uri_parts = urisplit(uri)
 
-    #     if uri_parts.scheme == self.DIALECT_SQLITE:
-    #         engine = create_engine(uri, connect_args={"check_same_thread": False})
-    #     elif uri_parts.scheme == self.DIALECT_POSTGRESQL:
-    #         uri = URL(drivername=uri_parts.scheme,
-    #                   host=uri_parts.host,
-    #                   port=uri_parts.getport(default=5432),
-    #                   database=database,
-    #                   username=username,
-    #                   password=password)
-    #         engine = create_engine(uri)
-    #     else:
-    #         raise ValueError("Engine '{engine}' not supported".format(engine=uri_parts.scheme))
+        if uri_parts.scheme == self.DIALECT_SQLITE:
+            engine = create_engine(uri, connect_args={"check_same_thread": False})
+        elif uri_parts.scheme == self.DIALECT_POSTGRESQL:
+            uri = URL(drivername=uri_parts.scheme,
+                      host=uri_parts.host,
+                      port=uri_parts.getport(default=5432),
+                      database=database,
+                      username=username,
+                      password=password)
+            engine = create_engine(uri)
+        else:
+            raise ValueError("Engine '{engine}' not supported".format(engine=uri_parts.scheme))
 
-    #     return engine.connect()
+        return engine.connect()
 
     # def close(self):
     #     self._logger.info("kkkkkkkk-FilamentManager(): def close(self):")
