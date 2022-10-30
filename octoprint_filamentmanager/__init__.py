@@ -423,8 +423,11 @@ class FilamentManagerPlugin(FilamentManagerApi,
         return (threshold is not None and extrusion[tool] >= threshold)
 
     def update_pause_thresholds(self):
+        self._logger.info("kkkkkkkk:def update_pause_thresholds(self):")        
         def set_threshold(selection):
+            self._logger.info("kkkkkkkk:def set_threshold(selection):")            
             def threshold(spool):
+                self._logger.info("kkkkkkkk:def threshold(spool):")                
                 radius = spool["profile"]["diameter"] / 2
                 volume = (spool["weight"] - spool["used"]) / spool["profile"]["density"]
                 length = (volume * 1000) / (PI * radius * radius)
@@ -432,6 +435,7 @@ class FilamentManagerPlugin(FilamentManagerApi,
 
             try:
                 spool = selection["spool"]
+                self._logger.info("kkkkkkkk:def threshold(spool): spool")                 
                 if spool is not None:
                     self.pauseThresholds["tool%s" % selection["tool"]] = threshold(spool)
             except ZeroDivisionError:
@@ -442,6 +446,7 @@ class FilamentManagerPlugin(FilamentManagerApi,
         self.pauseThresholds = dict()
 
         try:
+            self._logger.info("kkkkkkkk:def set_threshold(selection):get_all_selections")             
             selections = self.filamentManager.get_all_selections(self.client_id)
         except Exception as e:
             self._logger.error("Failed to fetch selected spools, pause feature will not be available: {message}"
@@ -457,6 +462,7 @@ class FilamentManagerPlugin(FilamentManagerApi,
     # Softwareupdate hook
 
     def get_update_information(self):
+        self._logger.info("kkkkkkkk:def get_update_information(self):")        
         return dict(
             filamentmanager=dict(
                 displayName="Filament Manager",
@@ -471,8 +477,7 @@ class FilamentManagerPlugin(FilamentManagerApi,
                 # update method: pip
                 #pip="https://github.com/malnvenshorn/OctoPrint-FilamentManager/archive/{target_version}.zip"
                 #pip="https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
-		pip="https://github.com/ldiegos/OctoPrint-FilamentManager/archive/{target_version}.zip"
-
+		        pip="https://github.com/ldiegos/OctoPrint-FilamentManager/archive/{target_version}.zip"
             )
         )
 
