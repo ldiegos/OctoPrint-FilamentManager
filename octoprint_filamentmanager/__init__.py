@@ -41,7 +41,9 @@ class FilamentManagerPlugin(FilamentManagerApi,
         self.pauseThresholds = dict()
 
     def initialize(self):
+        self._logger.info("kkkkkkkk:def initialize(self)")
         def get_client_id():
+            self._logger.info("kkkkkkkk:def get_client_id():")
             client_id = self._settings.get(["database", "clientID"])
             if client_id is None:
                 from uuid import uuid1
@@ -64,12 +66,13 @@ class FilamentManagerPlugin(FilamentManagerApi,
         migrate_schema_version = False
 
         if db_config["useExternal"] not in valid_boolean_trues:
+            self._logger.info("kkkkkkkk:db_config[")
             import os
             # set uri for internal sqlite database
             db_path = os.path.join(self.get_plugin_data_folder(), "filament.db")
-            self._logger.info("%s" % db_path)
+            self._logger.info("kkkkkkkk: %s" % db_path)
             db_config["uri"] = "sqlite:///" + db_path
-            self._logger.info("sqlite:///")
+            self._logger.info("kkkkkkkk: sqlite:/// %s" %db_path)
             migrate_schema_version = os.path.isfile(db_path)
 
         try:
@@ -113,6 +116,7 @@ class FilamentManagerPlugin(FilamentManagerApi,
             self._logger.exception("Failed to initialize database: {message}".format(message=str(e)))
 
     def migrate_database_schema(self, target, current):
+        self._logger.info("kkkkkkkk:def migrate_database_schema(self, target, current):")
         if current <= 1:
             # add temperature column
             sql = "ALTER TABLE spools ADD COLUMN temp_offset INTEGER NOT NULL DEFAULT 0;"
@@ -132,6 +136,8 @@ class FilamentManagerPlugin(FilamentManagerApi,
             self.filamentManager.initialize()
 
     def on_after_startup(self):
+        self._logger.info("kkkkkkkk:def on_after_startup(self):")
+
         self.odometerEnabled = self._settings.get_boolean(["enableOdometer"])
         self.pauseEnabled = self._settings.get_boolean(["autoPause"])
         self._logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkk")
@@ -154,10 +160,13 @@ class FilamentManagerPlugin(FilamentManagerApi,
         self.assign_temperature_offset()
 
     def on_shutdown(self):
+        self._logger.info("kkkkkkkk:def on_shutdown(self):")
         if self.filamentManager is not None:
             self.filamentManager.close()
 
     def on_data_modified(self, data, action):
+        self._logger.info("kkkkkkkk:def on_data_modified(self, data, action):")
+
         if action.lower() == "update":
             # if either profiles, spools or selections are updated
             # we have to recalculate the pause thresholds
@@ -178,6 +187,8 @@ class FilamentManagerPlugin(FilamentManagerApi,
         return 1
 
     def get_settings_defaults(self):
+        self._logger.info("kkkkkkkk:def get_settings_defaults(self):")
+
         return dict(
             enableOdometer=True,
             enableWarning=True,
@@ -201,6 +212,8 @@ class FilamentManagerPlugin(FilamentManagerApi,
             self._settings.set(["_db_version"], None)
 
     def on_settings_save(self, data):
+        self._logger.info("kkkkkkkk:def on_settings_save(self, data):")
+
         # before saving
         old_threshold = self._settings.getFloat(["pauseThreshold"])
         octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
