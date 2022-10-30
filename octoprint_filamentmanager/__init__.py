@@ -60,16 +60,16 @@ class FilamentManagerPlugin(FilamentManagerApi,
         self.alreadyCanceled = False
 
         db_config = self._settings.get(["database"], merged=True)
-	self._logger.info("db_config: {db_config}")
+	self._logger.info("db_config: %s" % db_config)
         migrate_schema_version = False
 
         if db_config["useExternal"] not in valid_boolean_trues:
             import os
             # set uri for internal sqlite database
             db_path = os.path.join(self.get_plugin_data_folder(), "filament.db")
-	    self._logger.info("db_path:{db_path}")
+	    self._logger.info("db_path: %s " % db_path)
             db_config["uri"] = "sqlite:///" + db_path
-	    self._logger.info("sqlite:///{db_path}")
+	    self._logger.info("sqlite:/// %s" % db_path)
             migrate_schema_version = os.path.isfile(db_path)
 
         try:
