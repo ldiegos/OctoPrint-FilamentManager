@@ -27,6 +27,7 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
 
     @octoprint.plugin.BlueprintPlugin.route("/profiles", methods=["GET"])
     def get_profiles_list(self):
+        self._logger.info("FilamentManagerApi:def get_profiles_list(self):")        
         force = request.values.get("force", "false") in valid_boolean_trues
 
         try:
@@ -56,6 +57,7 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
 
     @octoprint.plugin.BlueprintPlugin.route("/profiles/<int:identifier>", methods=["GET"])
     def get_profile(self, identifier):
+        self._logger.info("FilamentManagerApi:def get_profile(self, identifier):")        
         try:
             if (self.filamentManager != None):
                 profile = self.filamentManager.get_profile(identifier)
@@ -77,6 +79,8 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
     @octoprint.plugin.BlueprintPlugin.route("/profiles", methods=["POST"])
     @restricted_access
     def create_profile(self):
+        self._logger.info("FilamentManagerApi:def create_profile(self):")        
+
         if "application/json" not in request.headers["Content-Type"]:
             return make_response("Expected content-type JSON", 400)
 
@@ -109,6 +113,8 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
     @octoprint.plugin.BlueprintPlugin.route("/profiles/<int:identifier>", methods=["PATCH"])
     @restricted_access
     def update_profile(self, identifier):
+        self._logger.info("FilamentManagerApi:def update_profile(self, identifier):")        
+
         if "application/json" not in request.headers["Content-Type"]:
             return make_response("Expected content-type JSON", 400)
 
@@ -155,6 +161,8 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
     @octoprint.plugin.BlueprintPlugin.route("/profiles/<int:identifier>", methods=["DELETE"])
     @restricted_access
     def delete_profile(self, identifier):
+        self._logger.info("FilamentManagerApi:def delete_profile(self, identifier):")        
+
         try:
             if (self.filamentManager != None):
                 self.filamentManager.delete_profile(identifier)
@@ -171,6 +179,8 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
 
     @octoprint.plugin.BlueprintPlugin.route("/spools", methods=["GET"])
     def get_spools_list(self):
+        self._logger.info("FilamentManagerApi:def get_spools_list(self):")        
+
         force = request.values.get("force", "false") in valid_boolean_trues
 
         try:
@@ -200,6 +210,8 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
 
     @octoprint.plugin.BlueprintPlugin.route("/spools/<int:identifier>", methods=["GET"])
     def get_spool(self, identifier):
+        self._logger.info("FilamentManagerApi:def get_spool(self, identifier):")        
+
         try:
             if (self.filamentManager != None):
                 spool = self.filamentManager.get_spool(identifier)
@@ -221,6 +233,8 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
     @octoprint.plugin.BlueprintPlugin.route("/spools", methods=["POST"])
     @restricted_access
     def create_spool(self):
+        self._logger.info("FilamentManagerApi:def create_spool(self):")        
+
         if "application/json" not in request.headers["Content-Type"]:
             return make_response("Expected content-type JSON", 400)
 
@@ -260,6 +274,8 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
     @octoprint.plugin.BlueprintPlugin.route("/spools/<int:identifier>", methods=["PATCH"])
     @restricted_access
     def update_spool(self, identifier):
+        self._logger.info("FilamentManagerApi:def update_spool(self, identifier):")        
+
         if "application/json" not in request.headers["Content-Type"]:
             return make_response("Expected content-type JSON", 400)
 
@@ -322,6 +338,8 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
 
     @octoprint.plugin.BlueprintPlugin.route("/selections", methods=["GET"])
     def get_selections_list(self):
+        self._logger.info("FilamentManagerApi:def get_selections_list(self):")        
+
         try:
             if (self.filamentManager != None):
 
@@ -440,7 +458,11 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
     @restricted_access
     @Permissions.ADMIN.require(403)
     def import_data(self):
+        self._logger.info("FilamentManagerApi:def import_data(self):")        
+
         def unzip(filename, extract_dir):
+            self._logger.info("FilamentManagerApi:def unzip(filename, extract_dir):")        
+
             # python 2.7 lacks of shutil.unpack_archive ¯\_(ツ)_/¯
             from zipfile import ZipFile
             with ZipFile(filename, "r") as zip_file:

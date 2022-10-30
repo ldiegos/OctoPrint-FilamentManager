@@ -10,10 +10,7 @@ from multiprocessing import Lock
 
 from backports import csv
 from uritools import urisplit
-#from uritools import uricompose, urijoin, urisplit, uriunsplit
-#from sqlalchemy.engine.url import URL
 from sqlalchemy.engine.url import URL
-#from sqlalchemy.engine import url
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.schema import MetaData, Table, Column, ForeignKeyConstraint, DDL, PrimaryKeyConstraint
 from sqlalchemy.sql import insert, update, delete, select, label
@@ -24,7 +21,7 @@ import sqlalchemy.sql.functions as func
 from .listen import PGNotify
 
 
-class FilamentManager(object):
+class FilamentManagerData(object):
 
     DIALECT_SQLITE = "sqlite"
     DIALECT_POSTGRESQL = "postgresql"
